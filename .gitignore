@@ -1,0 +1,4 @@
+.env
+*.exe
+README.md
+/bin/
