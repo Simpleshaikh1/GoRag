@@ -1,9 +1,3 @@
-// Day 1, exercise 2: see how embeddings capture meaning.
-//
-// Embeds a handful of sentences, then ranks them by similarity to a query.
-// This ranking step is the "retrieval" in RAG.
-//
-//	go run ./cmd/embed-demo "how do I stop too many requests?"
 package main
 
 import (

@@ -1,6 +1,3 @@
-// Day 1, exercise 1: your first Claude call, streamed to the terminal.
-//
-//	go run ./cmd/hello "Explain goroutines in two sentences"
 package main
 
 import (
