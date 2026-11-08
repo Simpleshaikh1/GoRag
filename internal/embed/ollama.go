@@ -30,7 +30,32 @@ type embedResponse struct {
 	Embeddings [][]float32 `json:"embeddings"`
 }
 
-// Embed returns one vector per input text, in the same order.
+// nomic-embed-text was trained with task prefixes: stored text and questions
+// are marked differently, which makes question-to-document matching sharper.
+const (
+	documentPrefix = "search_document: "
+	queryPrefix    = "search_query: "
+)
+
+// EmbedDocuments embeds text that will be stored and searched.
+func (o *Ollama) EmbedDocuments(ctx context.Context, texts []string) ([][]float32, error) {
+	prefixed := make([]string, len(texts))
+	for i, t := range texts {
+		prefixed[i] = documentPrefix + t
+	}
+	return o.Embed(ctx, prefixed)
+}
+
+// EmbedQuery embeds a user's question.
+func (o *Ollama) EmbedQuery(ctx context.Context, text string) ([]float32, error) {
+	vecs, err := o.Embed(ctx, []string{queryPrefix + text})
+	if err != nil {
+		return nil, err
+	}
+	return vecs[0], nil
+}
+
+// Embed returns one vector per input text, in the same order, with no prefix.
 func (o *Ollama) Embed(ctx context.Context, texts []string) ([][]float32, error) {
 	body, err := json.Marshal(embedRequest{Model: o.Model, Input: texts})
 	if err != nil {
