@@ -83,7 +83,7 @@ func main() {
 		if err != nil {
 			return err
 		}
-		rel = filepath.ToSlash(rel) // store "JWT-AUTH/main.go" on every OS
+		rel = filepath.ToSlash(rel)
 		cs := chunk.File(rel, src)
 		if len(cs) == 0 {
 			return nil
