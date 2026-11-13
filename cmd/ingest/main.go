@@ -21,7 +21,7 @@ var skipDirs = map[string]bool{
 	".git": true, ".idea": true, ".vscode": true, "vendor": true, "node_modules": true, "bin": true,
 }
 
-// Files bigger than this are usually generated (mocks, bundles, data dumps).
+// Files bigger than this are usually generated.
 const maxFileBytes = 200_000
 
 // How many chunks go to Ollama per request.
